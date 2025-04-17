@@ -1,11 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
-
+CHOICE_FIELD = [
+    ('teacher','is_instructor'),
+    ('student','is_student')
+]
 class Profile(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    is_instructor = models.BooleanField(default=False)
-    is_student = models.BooleanField(default=True)
+    
+    personality = models.CharField(max_length=20,choices=CHOICE_FIELD,default='is_student')
     
     def __str__(self):
         return self.user.username
